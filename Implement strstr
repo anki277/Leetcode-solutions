@@ -1,0 +1,8 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+     int a=-1;
+      if(haystack.contains(needle))
+          a=haystack.indexOf(needle);
+        return a;
+    }
+}
