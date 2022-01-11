@@ -1,0 +1,20 @@
+class Solution {
+    public String reverseWords(String s) {
+        StringBuffer result = new StringBuffer();
+        int end = s.length();
+        char prev = s.charAt(s.length()-1);
+        
+        for(int i=s.length()-1; i>=0; i--) {
+            if(s.charAt(i) == ' ' && prev !=' ') { // If previous char is also ' ' then do not append
+                result.append(" ").append(s.substring(i, end).trim());
+                end=i;
+            }
+            if(i==0) { // for the first word
+                result.append(" ").append(s.substring(i, end));
+            }
+            prev = s.charAt(i);
+        }
+        
+        return result.toString().trim();
+    }
+}
