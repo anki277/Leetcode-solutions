@@ -1,0 +1,17 @@
+class Solution {
+    public boolean areAlmostEqual(String s1, String s2) {
+              if(s1.equals(s2)) return true;
+        
+        int l = s1.length();
+        for(int i =0; i<l ; i++){
+            for(int j=i+1; j<l; j++){
+                char[] ch = s1.toCharArray();
+                ch[i]=s1.charAt(j);
+                ch[j]=s1.charAt(i);
+                if(String.valueOf(ch).equals(s2)) return true;        
+            }
+        }
+        
+        return false;
+    }
+}
