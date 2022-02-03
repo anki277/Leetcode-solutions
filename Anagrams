@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class Solution {
+    
+
+    static boolean isAnagram(String a, String b) {
+        a=a.toLowerCase();
+        b=b.toLowerCase();
+    char ch[]=a.toCharArray();
+    char c[]=b.toCharArray();
+    if(c.length!=ch.length)
+    return false;
+    else
+    {
+    for(int i=0;i<ch.length;i++)
+    {
+      for(int j=0;j<ch.length-i-1;j++)
+      {
+          if(ch[j]>ch[j+1])
+          {
+              char temp=ch[j];
+              ch[j]=ch[j+1];
+              ch[j+1]=temp;
+          }
+      }  
+    }
+     for(int i=0;i<c.length;i++)
+    {
+      for(int j=0;j<c.length-i-1;j++)
+      {
+          if(c[j]>c[j+1])
+          {
+              char temp=c[j];
+              c[j]=c[j+1];
+              c[j+1]=temp;
+          }
+      }  
+    }
+    for(int i=0;i<ch.length;i++)
+    {
+    if(ch[i]!=c[i])
+    {
+        return false;
+    }
+    }
+    return true;
+    }// Complete the function
+    }
+
+    public static void main(String[] args) {
