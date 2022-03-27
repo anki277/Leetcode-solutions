@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isUgly(int n) {
+          // if a number is smaller then or equal to zero then its not an ugly number
+        if(n <= 0) return false;
+        
+        // remove all the 2's from the number
+        while(n % 2 == 0) n /= 2;
+        
+        // remove all the 3's from the number
+        while(n % 3 == 0) n /= 3;
+        
+        // remove all the 5's from the number
+        while(n % 5 == 0) n /= 5;
+    
+        // if after removing all the 2, 3, 5 the number will become one 
+        // then the number is ugly otherwise not
+        return n == 1;
+}
+}
