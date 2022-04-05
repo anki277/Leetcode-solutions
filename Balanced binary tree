@@ -1,0 +1,51 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        	Deque<Integer> height = new LinkedList<Integer>();
+		Deque<TreeNode> deque = new LinkedList<TreeNode>();
+		boolean done = false;
+
+		if (root == null) return true;
+		while (!done) {
+			if (root != null) {
+				if (root.right != null) {
+					deque.addFirst(root.right);
+				} else {
+					height.addFirst(0);
+				}
+				deque.addFirst(root);
+				root = root.left;
+				if (root == null) height.addFirst(0);
+			} else if (!deque.isEmpty()) {
+				root = deque.removeFirst();
+				if (root.right != null && root.right == deque.peek()) {// has not processed right child yet
+					deque.removeFirst();
+					deque.addFirst(root);
+					root = root.right;
+				} else {
+					int heightA = height.removeFirst();
+					int heightB = height.removeFirst();
+					if (Math.abs(heightB - heightA) > 1) return false;
+					height.addFirst(Math.max(heightA, heightB) + 1);
+					root = null;
+				}
+			} else done = true;
+		}
+
+		return true;
+        }
+}
