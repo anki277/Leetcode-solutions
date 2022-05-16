@@ -1,0 +1,20 @@
+class Solution {
+    public String sortSentence(String s) {
+       String[] arr = s.split(" ");
+    String[] ansArr = new String[arr.length];
+    StringBuilder ans = new StringBuilder();
+    for(int i = 0; i<arr.length; i++){
+        int Size = arr[i].length();
+        char lastChar = arr[i].charAt(Size-1);
+        int lastCharInt = lastChar - '0';
+        ansArr[lastCharInt-1] = arr[i].substring(0,Size-1);
+    }
+    for(int i = 0; i<arr.length; i++){
+        ans.append(ansArr[i]);
+        if(i!=arr.length-1){
+            ans.append(" ");
+        }
+    }
+    return ans.toString(); 
+    }
+}
