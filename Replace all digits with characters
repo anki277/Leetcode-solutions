@@ -1,0 +1,19 @@
+class Solution {
+    public String replaceDigits(String s) {
+       char c[] = s.toCharArray() ;
+
+        for(int i = 1 ; i < c.length;i++){
+
+            if(c[i]>='1' && c[i]<='9'){
+                int k = (int)c[i] - 48;
+
+                c[i] = (char)(((int)c[i-1] + k) % (26 + 97)) ;
+            }
+              else if( c[i] == '0'){
+                c[i] = c[i-1];
+            }
+        }
+
+        return new String(c);
+    }
+}
