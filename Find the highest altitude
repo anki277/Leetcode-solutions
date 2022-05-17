@@ -1,0 +1,12 @@
+class Solution {
+    public int largestAltitude(int[] gain) {
+        int a[]=new int[gain.length+1];
+        a[0]=0;
+        int k=1;
+        for(int i=0;i<gain.length;i++){
+            a[k]=a[k-1]+gain[i];
+            k++;}
+        Arrays.sort(a);
+        return a[gain.length];
+    }
+}
