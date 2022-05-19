@@ -1,0 +1,42 @@
+class Solution {
+    public String toGoatLatin(String sentence) {
+          String[] spltStr = sentence.split(" ");
+        StringBuilder res = new StringBuilder();
+		// loop throught all strings
+        for (int i = 0; i < spltStr.length; i++) {
+            int k = i;
+            StringBuilder sb = new StringBuilder();
+			// check vowel or not
+			// if vowel append string and ma end of the string
+            if (isVowel(spltStr[i].charAt(0))) {
+                sb.append(spltStr[i]);
+                sb.append("ma");
+            } else {
+			// otherwise add 1 to length of string
+                for (int j = 1; j < spltStr[i].length(); j++) {
+                    sb.append(spltStr[i].charAt(j));
+                }
+				// add 0 index index at last
+                sb.append(spltStr[i].charAt(0));
+                sb.append("ma");
+            }
+			// add number of i a in the string
+            while (k >= 0){
+                sb.append('a');
+                k--;
+            }
+            res.append(sb);
+			// append space between two string
+            res.append(" ");
+        }
+		// trim because at last space will be there.
+        return res.toString().trim(); 
+    }
+    
+        private boolean isVowel(char c) {
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+            return true;
+        }
+        return false; 
+    }
+}
