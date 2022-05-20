@@ -1,0 +1,16 @@
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(Comparator.reverseOrder());
+        
+        for (int stone : stones) maxHeap.add(stone);
+        
+        while (maxHeap.size() > 1){
+            int largest = maxHeap.poll();
+            int nextLargest = maxHeap.poll();
+            largest = largest - nextLargest;
+            if (largest > 0) maxHeap.add(largest);
+        }
+        
+        return (maxHeap.isEmpty()) ? 0 : maxHeap.poll();
+    }
+}
