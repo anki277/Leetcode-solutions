@@ -1,0 +1,79 @@
+class MyHashMap {
+   
+    // Time Complexity -> O(N/K) -> N/K searches in the bucket (initial search is O(1))
+    // Space Complexity : O(K + M): #size of bucket + all buckets
+    class Bucket{
+
+        // Linkedlist -> O(1) to remove and insert
+        // ArrayList -> O(1) to search -> use the one which is required, but O(N) to add/delete
+            // We fous on insertio -> buckets do the heavy lifting for searching with modulo (we want a balance)
+        LinkedList<Pair<Integer, Integer>> bucketList = new LinkedList<>();
+
+        public Bucket() {
+        }
+
+        public void insert(Integer key, Integer value) {
+            remove(key);
+            Pair<Integer, Integer> pair = new Pair<>(key, value);
+            this.bucketList.addFirst(pair);
+        }
+        
+        public int get(Integer key){
+            if(this.bucketList.isEmpty())
+                return -1;
+            for(Pair<Integer, Integer> entry : bucketList){
+                if(entry.getKey().intValue() == (int)key)
+                   return entry.getValue();
+            }
+            return -1;
+        }
+        
+        public void remove(Integer key){
+            if(this.bucketList.isEmpty())
+                return;
+            Pair<Integer, Integer> entryFound = null;
+            for(Pair<Integer, Integer> entry : bucketList){
+                if(entry.getKey().intValue() == (int)key){
+                    entryFound = entry;
+                    break;
+                }
+            }
+            if(entryFound != null)
+                this.bucketList.remove(entryFound);
+        }
+    }
+    
+    // Create Buckets
+    Bucket[] buckets;
+    private int keyRange;
+
+    /** Initialize your data structure here. */
+    public MyHashMap() {
+        this.keyRange = 769;
+        this.buckets = new Bucket[this.keyRange];
+        for (int i = 0; i < this.keyRange; ++i)
+            this.buckets[i] = new Bucket();        
+    }
+    
+    protected int getHash(int key) {
+        return (key % this.keyRange);
+    }
+    
+    public void put(int key, int value) {
+        int bucketId  = getHash(key);
+        Bucket bucket = buckets[bucketId];
+        bucket.insert(key, value);
+    }
+    
+    public int get(int key) {
+        int bucketId  = getHash(key);
+        Bucket bucket = buckets[bucketId];
+        return bucket.get(key);
+    }
+    
+    public void remove(int key) {
+        int bucketId  = getHash(key);
+        Bucket bucket = buckets[bucketId];
+        bucket.remove(key);
+    }
+}
