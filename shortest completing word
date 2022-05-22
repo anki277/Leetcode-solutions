@@ -1,0 +1,38 @@
+class Solution {
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+           licensePlate = licensePlate.toLowerCase();
+        Map<Character, Integer> freqMap = new HashMap<>();
+        for(char letter: licensePlate.toCharArray()) {
+            if(Character.isDigit(letter) || letter == ' ') {
+                continue;
+            }
+            freqMap.put(letter, freqMap.getOrDefault(letter, 0) + 1);
+        }
+        String answer = "";
+        for(String word: words) {
+            Map<Character, Integer> wordFreqMap = new HashMap<>();
+            boolean check = true;
+            for(char letter: word.toCharArray()) {
+                wordFreqMap.put(letter, wordFreqMap.getOrDefault(letter, 0) + 1);
+            }
+            for(Map.Entry<Character, Integer> entry: freqMap.entrySet()) {
+                char letter = entry.getKey();
+                if(wordFreqMap.containsKey(letter)) {
+                    if(wordFreqMap.get(letter) < entry.getValue()) {
+                        check = false;
+                        break;
+                    }
+                } else {
+                    check = false;
+                    break;
+                }
+            }
+            if(check) {
+                if(answer.equals("") || answer.length() > word.length()) {
+                    answer = word;
+                }
+            }
+        }
+        return answer;
+    }
+}
