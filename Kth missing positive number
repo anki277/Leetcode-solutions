@@ -1,0 +1,27 @@
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+       int start = 0;
+        int end = arr.length-1;
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            //we find no. of missing numbers from start to mid;
+            int numberOfMissing = arr[mid]-(mid+1);
+            if(numberOfMissing < k){
+                start = mid+1;
+            }
+            else
+            {
+                end=mid-1;
+            } 
+        }
+        //if end is -1 means the first letter is missing so we return k
+        if(end==-1) return k;
+        //if not actual number i.e arr[end]-(end+1);
+        // we get no.ofmissing nums
+        int numberOfMissing = arr[end]-(end+1);
+        //now we need the actual value of missing number k
+        // answer = actual value + k - numberOfMissing;
+        int answer = arr[end]+k-numberOfMissing;
+        return answer;  
+    }
+}
