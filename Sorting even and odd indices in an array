@@ -1,0 +1,31 @@
+class Solution {
+    public int[] sortEvenOdd(int[] nums) {
+      int n = nums.length;
+        
+        ArrayList<Integer> oddIndexed = new ArrayList<>();
+        ArrayList<Integer> evenIndexed = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            if(i%2 == 0){
+                evenIndexed.add(nums[i]);
+            } else{
+                oddIndexed.add(nums[i]);
+            }
+        }
+        
+        // sorting them using lambda expression
+        Collections.sort(oddIndexed, (x, y) -> (x<y) ? 1:-1);
+        Collections.sort(evenIndexed, (x, y) -> (x>y) ? 1:-1);
+        
+        // rearranging the array nums
+        for(int i=0; i<n; i++){
+            if(i%2 == 0){
+                nums[i] = evenIndexed.get(i/2);
+            } else{
+                nums[i] = oddIndexed.get(i/2);
+            }
+        }
+        
+        return nums;
+
+    }
+}
