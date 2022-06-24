@@ -1,0 +1,38 @@
+class Solution {
+    public String modifyString(String s) {
+        char[] arr = s.toCharArray();
+        for(int i = 0; i < arr.length; i++){
+            
+            if(arr[i] == '?'){
+                
+                int left = i - 1;
+                int right = i + 1;
+                
+                char leftCh = '.';
+                char rightCh = '.';
+                
+                if(left >= 0){
+                    leftCh = arr[left];
+                }
+                
+                if(right < arr.length){
+                    rightCh = arr[right];
+                }
+                
+                //put a char at ith pos of ? by checking its left char
+                arr[i] = isAlpha((char)(leftCh + 1)) ? (char)(leftCh + 1) : 'a';
+                
+                //check char at ith pos (generated newly) with its right char
+                //if they are same we can simply update it again
+                if(arr[i] == rightCh){
+                    arr[i] = isAlpha((char)(rightCh + 1)) ? (char)(rightCh + 1) : 'a';
+                }
+                
+            }
+        }
+        return String.valueOf(arr);
+    }
+      boolean isAlpha(char ch){
+        return ch >= 'a' && ch <= 'z';
+}
+}
